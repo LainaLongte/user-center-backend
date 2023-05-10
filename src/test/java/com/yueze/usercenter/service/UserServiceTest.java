@@ -26,7 +26,7 @@ class UserServiceTest {
     @Test
     void testAddUser(){
         User user = new User();
-        user.setUserName("queen");
+        user.setUsername("queen");
         user.setUserAccount("queen");
         user.setAvatarUrl("https://images.unsplash.com/photo-1599572741422-03c2e858184a?ixid=Mnw4OTgyNHwwfDF8c2VhcmNofDE0fHwlRTUlOEElQTglRTclODklQTl8ZW58MHx8fHwxNjgyNDI2ODM2&ixlib=rb-4.0.3&w=750&dpi=2");
         user.setGender(0);
@@ -48,28 +48,29 @@ class UserServiceTest {
         String userAccount = "superman";
         String userPassword = "";
         String checkPassword = "";
-        long result = userService.userRegister(userAccount, userPassword, checkPassword);
+        String planetCode = "20564";
+        long result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
         Assertions.assertEquals(-1, result);
         // 长度
         userPassword = "123456";
         checkPassword = "123456";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
         Assertions.assertEquals(-1, result);
         // 两个密码不一致
         userPassword = "12345678";
         checkPassword = "12345677";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
         Assertions.assertEquals(-1, result);
         checkPassword = "12345678";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
         assertTrue(result > 0);
         // 账户不包含特殊字符
         userAccount = "yue ze";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
         Assertions.assertEquals(-1, result);
         // 账户不能重复
         userAccount = "yueze";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
         Assertions.assertEquals(-1, result);
     }
 
