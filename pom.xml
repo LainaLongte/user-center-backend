@@ -11,7 +11,7 @@
     <groupId>com.yueze</groupId>
     <artifactId>user-center-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user-center</name>
+    <name>user-center-backend</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
