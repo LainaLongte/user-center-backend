@@ -32,7 +32,6 @@ class UserCenterApplicationTests {
         qw.like("userAccount", "man");
         List<User> list = userService.list(qw);
         System.out.println(list);
-
     }
 
 }

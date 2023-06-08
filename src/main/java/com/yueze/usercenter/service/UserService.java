@@ -1,9 +1,10 @@
 package com.yueze.usercenter.service;
 
-import com.yueze.usercenter.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yueze.usercenter.model.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
 * @author yueze
@@ -35,16 +36,55 @@ public interface UserService extends IService<User> {
     /**
      * 用户脱敏
      *
-     * @param originUser
-     * @return
+     * @param originUser 源用户
+     * @return 安全用户
      */
     User getSafetyUser(User originUser);
 
     /**
      * 用户注销
      *
+     * @param request 请求
+     * @return 1
+     */
+    int userLogout(HttpServletRequest request);
+
+    /**
+     * 根据标签搜索用户（内存过滤）
+     *
+     * @param tagNameList 用户标签列表
+     * @return 用户列表
+     */
+    List<User> searchUsersByTags(List<String> tagNameList);
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    int updateUser(User user, User loginUser);
+
+    /**
+     * 获取当前登录用户信息
+     * @return
+     */
+    User getLoginUser(HttpServletRequest request);
+
+    /**
+     * 是否为管理员
+     *
      * @param request
      * @return
      */
-    int userLogout(HttpServletRequest request);
+    boolean isAdmin(HttpServletRequest request);
+
+    /**
+     * 是否为管理员
+     *
+     * @param loginUser
+     * @return
+     */
+    boolean isAdmin(User loginUser);
+
+
 }
