@@ -29,6 +29,7 @@ public class UserController {
 
     @PostMapping("/register")
     public BaseResponse<Long> userRegister(@RequestBody UserRegisterRequest userRegisterRequest) {
+        // 非null
         if (userRegisterRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -36,9 +37,11 @@ public class UserController {
         String userPassword = userRegisterRequest.getUserPassword();
         String checkPassword = userRegisterRequest.getCheckPassword();
         String planetCode = userRegisterRequest.getPlanetCode();
+        // 非null非空格 Apache commons-lang3
         if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword, planetCode)) {
-            return null;
+            return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
+        // UserService.java
         long result = userService.userRegister(userAccount, userPassword, checkPassword, planetCode);
         return ResultUtils.success(result);
     }
@@ -46,14 +49,17 @@ public class UserController {
 
     @PostMapping("/login")
     public BaseResponse<User> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
+        // 非null
         if (userLoginRequest == null) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
         String userAccount = userLoginRequest.getUserAccount();
         String userPassword = userLoginRequest.getUserPassword();
+        // 非null非空格 Apache commons-lang3
         if (StringUtils.isAnyBlank(userAccount, userPassword)) {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR);
         }
+        // UserService.java
         User user = userService.userLogin(userAccount, userPassword, request);
         return ResultUtils.success(user);
 
@@ -61,9 +67,11 @@ public class UserController {
 
     @PostMapping("/logout")
     public BaseResponse<Integer> userLogout(HttpServletRequest request) {
+        // 非null
         if (request == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+        // UserService.java
         int result = userService.userLogout(request);
         return ResultUtils.success(result);
     }

@@ -1,7 +1,10 @@
 spring:
+  # SwaggerConfig.java
+  profiles:
+    default: dev
   application:
     name: user-center-backend
-  # DataSource Config
+  # mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -10,13 +13,20 @@ spring:
   # session 失效时间
   session:
     timeout: 86400
+  # SwaggerConfig.java
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 server:
+  # url
   port: 8010
   servlet:
     context-path: /api
 mybatis-plus:
+  # user.sql MyBatisX-Generator
   configuration:
     map-underscore-to-camel-case: false
+  # User.java
   global-config:
     db-config:
       logic-delete-field: isDelete # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
